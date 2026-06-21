@@ -1029,7 +1029,7 @@ select:focus {
 
 @media (min-width: 900px) {
   .sidebar {
-    width: 26rem;
+    width: 20.8rem;
     margin: 1rem 0 1rem 1rem;
     border-radius: 1.25rem;
     box-shadow: var(--shadow-md);
