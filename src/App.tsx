@@ -9,10 +9,12 @@ import { ActivitiesScreen } from '@/pages/ActivitiesScreen'
 import { TeacherScreen } from '@/pages/TeacherScreen'
 
 export default function App() {
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined
+
   return (
     <ThemeProvider>
       <SpellItProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={basename}>
           <Routes>
             <Route element={<AppLayout />}>
               <Route path="/" element={<HomeScreen />} />
