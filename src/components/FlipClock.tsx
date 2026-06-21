@@ -92,6 +92,7 @@ export function FlipClock({ now: externalNow, compact = false }: FlipClockProps)
                 <FlipUnit value={minuteOnes} size="time" />
               </div>
               <FlipUnit value={meridiem} size="meridiem" />
+              <span className="flip-panel__hinge" />
             </div>
             <div className="flip-panel__date-stack">
               <FlipUnit value={weekday} size="weekday" />
@@ -101,7 +102,6 @@ export function FlipClock({ now: externalNow, compact = false }: FlipClockProps)
               </span>
             </div>
           </div>
-          <span className="flip-panel__hinge" />
           <span className="flip-panel__pin flip-panel__pin--left" />
           <span className="flip-panel__pin flip-panel__pin--right" />
         </div>
