@@ -846,6 +846,37 @@ select:focus {
   border-radius: 0.5rem;
 }
 
+.handwriting-cursive-ref {
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+
+.handwriting-cursive-ref__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.handwriting-cursive-ref__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.handwriting-cursive-ref__image {
+  display: block;
+  width: 100%;
+  margin-top: 0.85rem;
+  border-radius: 0.5rem;
+  object-fit: contain;
+}
+
 .suffix-match-word {
   margin: 0;
   text-align: center;

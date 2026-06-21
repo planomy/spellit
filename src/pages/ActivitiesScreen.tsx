@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { MASCOT_IDEA } from '@/assets'
+import { MASCOT_IDEA, QLD_CURSIVE_REFERENCE } from '@/assets'
 import { useNavigate } from 'react-router-dom'
 import { ACTIVITIES } from '@/data/defaults'
 import { useSpellIt } from '@/hooks/useSpellItStore'
@@ -371,61 +371,84 @@ function SuffixMatchActivity() {
 
 function HandwritingActivity() {
   const { activeList } = useSpellIt()
+  const [showCursiveRef, setShowCursiveRef] = useState(false)
   const snipWords = activeList?.words.filter((w) => w.isSnip) ?? []
   const paragraphText = activeList?.handwritingParagraphText?.trim()
   const paragraphImage = activeList?.handwritingParagraphImage
   const hasParagraph = Boolean(paragraphText || paragraphImage)
-
-  if (!snipWords.length && !hasParagraph) {
-    return (
-      <p className="text-sm text-[var(--text-muted)]">
-        No handwriting content yet. Ask your teacher to add snip words and a paragraph in Teacher.
-      </p>
-    )
-  }
+  const isEmpty = !snipWords.length && !hasParagraph
 
   return (
     <div>
-      {hasParagraph && (
-        <section className="handwriting-paragraph-display mb-5">
-          <h3 className="handwriting-paragraph-display__title">Copy this paragraph</h3>
-          {paragraphImage ? (
-            <img
-              src={paragraphImage}
-              alt="Handwriting paragraph to copy"
-              className="handwriting-paragraph-display__image"
-            />
-          ) : (
-            <p className="handwriting-paragraph-display__text">{paragraphText}</p>
-          )}
-        </section>
-      )}
+      <section className="handwriting-cursive-ref mb-5">
+        <div className="handwriting-cursive-ref__header">
+          <h3 className="handwriting-cursive-ref__title">QLD cursive letters</h3>
+          <button
+            type="button"
+            className="btn-secondary text-sm"
+            onClick={() => setShowCursiveRef((open) => !open)}
+            aria-expanded={showCursiveRef}
+          >
+            {showCursiveRef ? 'Hide reference' : 'Show reference'}
+          </button>
+        </div>
+        {showCursiveRef && (
+          <img
+            src={QLD_CURSIVE_REFERENCE}
+            alt="Queensland Modern Cursive lowercase letters a to z"
+            className="handwriting-cursive-ref__image"
+          />
+        )}
+      </section>
 
-      {snipWords.length > 0 && (
+      {isEmpty ? (
+        <p className="text-sm text-[var(--text-muted)]">
+          No handwriting content yet. Ask your teacher to add snip words and a paragraph in Teacher.
+        </p>
+      ) : (
         <>
-          <p className="mb-4 text-sm text-[var(--text-muted)]">
-            For handwriting: write each snip word neatly in cursive. You have 10 minutes. Cross out
-            mistakes — no eraser needed!
+          {hasParagraph && (
+            <section className="handwriting-paragraph-display mb-5">
+              <h3 className="handwriting-paragraph-display__title">Copy this paragraph</h3>
+              {paragraphImage ? (
+                <img
+                  src={paragraphImage}
+                  alt="Handwriting paragraph to copy"
+                  className="handwriting-paragraph-display__image"
+                />
+              ) : (
+                <p className="handwriting-paragraph-display__text">{paragraphText}</p>
+              )}
+            </section>
+          )}
+
+          {snipWords.length > 0 && (
+            <>
+              <p className="mb-4 text-sm text-[var(--text-muted)]">
+                For handwriting: write each snip word neatly in cursive. You have 10 minutes. Cross out
+                mistakes — no eraser needed!
+              </p>
+              <ul className="space-y-3">
+                {snipWords.map((w, i) => (
+                  <li key={w.id} className="card flex items-center gap-4 p-4">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-sm font-bold text-white">
+                      {i * 5 + 5}
+                    </span>
+                    <div>
+                      <p className="font-display text-xl font-bold">{w.word}</p>
+                      <p className="text-xs text-[var(--text-muted)]">{w.segments.join(' · ')}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          <p className="mt-4 rounded-lg bg-[var(--bg-secondary)] p-3 text-xs text-[var(--text-muted)]">
+            📸 Photograph your writing and paste it onto OneNote when finished.
           </p>
-          <ul className="space-y-3">
-            {snipWords.map((w, i) => (
-              <li key={w.id} className="card flex items-center gap-4 p-4">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-sm font-bold text-white">
-                  {i * 5 + 5}
-                </span>
-                <div>
-                  <p className="font-display text-xl font-bold">{w.word}</p>
-                  <p className="text-xs text-[var(--text-muted)]">{w.segments.join(' · ')}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
         </>
       )}
-
-      <p className="mt-4 rounded-lg bg-[var(--bg-secondary)] p-3 text-xs text-[var(--text-muted)]">
-        📸 Photograph your writing and paste it onto OneNote when finished.
-      </p>
     </div>
   )
 }

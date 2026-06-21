@@ -1,5 +1,5 @@
 /** Bump when public/*.png assets are re-processed (cache bust for browser preview). */
-export const ASSETS_VERSION = '21'
+export const ASSETS_VERSION = '22'
 
 export function asset(path: string) {
   const file = path.startsWith('/') ? path.slice(1) : path
@@ -26,3 +26,5 @@ export const ICON_ACTIVITY_SPELL_CHECK = asset('/icon-activity-spell-check.png')
 export const ICON_ACTIVITY_SUFFIX_MATCH = asset('/icon-activity-suffix-match.png')
 export const ICON_ACTIVITY_HANDWRITING = asset('/icon-activity-handwriting.png')
 export const ICON_ACTIVITY_TEST_MODE = asset('/icon-activity-test-mode.png')
+
+export const QLD_CURSIVE_REFERENCE = asset('/qld-cursive-reference.png')
