@@ -2,7 +2,8 @@
 export const ASSETS_VERSION = '21'
 
 export function asset(path: string) {
-  return `${path}?v=${ASSETS_VERSION}`
+  const file = path.startsWith('/') ? path.slice(1) : path
+  return `${import.meta.env.BASE_URL}${file}?v=${ASSETS_VERSION}`
 }
 
 export const LOGO = asset('/logo.png')
