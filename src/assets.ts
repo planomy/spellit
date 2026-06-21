@@ -1,5 +1,5 @@
 /** Bump when public/*.png assets are re-processed (cache bust for browser preview). */
-export const ASSETS_VERSION = '22'
+export const ASSETS_VERSION = '23'
 
 export function asset(path: string) {
   const file = path.startsWith('/') ? path.slice(1) : path

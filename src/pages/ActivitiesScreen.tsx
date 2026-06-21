@@ -382,7 +382,7 @@ function HandwritingActivity() {
     <div>
       <section className="handwriting-cursive-ref mb-5">
         <div className="handwriting-cursive-ref__header">
-          <h3 className="handwriting-cursive-ref__title">QLD cursive letters</h3>
+          <h3 className="handwriting-cursive-ref__title">QLD cursive example</h3>
           <button
             type="button"
             className="btn-secondary text-sm"
@@ -393,11 +393,13 @@ function HandwritingActivity() {
           </button>
         </div>
         {showCursiveRef && (
-          <img
-            src={QLD_CURSIVE_REFERENCE}
-            alt="Queensland Modern Cursive lowercase letters a to z"
-            className="handwriting-cursive-ref__image"
-          />
+          <div className="handwriting-cursive-ref__scroll">
+            <img
+              src={QLD_CURSIVE_REFERENCE}
+              alt="Queensland Modern Cursive sample: The quick brown fox jumps over the lazy dog."
+              className="handwriting-cursive-ref__image"
+            />
+          </div>
         )}
       </section>
 

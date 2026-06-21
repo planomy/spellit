@@ -869,10 +869,17 @@ select:focus {
   color: var(--accent);
 }
 
+.handwriting-cursive-ref__scroll {
+  margin-top: 0.85rem;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
 .handwriting-cursive-ref__image {
   display: block;
   width: 100%;
-  margin-top: 0.85rem;
+  min-width: 36rem;
   border-radius: 0.5rem;
   object-fit: contain;
 }
