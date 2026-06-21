@@ -174,11 +174,32 @@ def strip_green_fringe(arr: np.ndarray, *, passes: int = 16) -> None:
         arr[bad, :3] = 0
 
 
+def purple_sidebar_bg_mask(rgb: np.ndarray) -> np.ndarray:
+    rgb = rgb.astype(np.int16)
+    r, g, b = rgb[:, :, 0], rgb[:, :, 1], rgb[:, :, 2]
+    s = sat(rgb)
+    return (b >= 130) & (b > r + 12) & (g < 200) & (s >= 6)
+
+
 def process_logo(arr: np.ndarray) -> None:
     """Remove solid export backgrounds while keeping artwork."""
     rgb = arr[:, :, :3].astype(np.int16)
     h, w = rgb.shape[:2]
     corners = np.array([rgb[0, 0], rgb[0, w - 1], rgb[h - 1, 0], rgb[h - 1, w - 1]])
+
+    edge_pixels = np.concatenate([rgb[0], rgb[-1], rgb[:, 0], rgb[:, -1]])
+    if purple_sidebar_bg_mask(edge_pixels.reshape(1, -1, 3)).mean() > 0.12:
+        flood_solid_bg_from_edges(arr, purple_sidebar_bg_mask(rgb))
+        rgb = arr[:, :, :3].astype(np.int16)
+        visible = arr[:, :, 3] > 10
+        s = sat(rgb)
+        mx = rgb.max(axis=2)
+        ink = visible & ((mx < 95) | (rgb.min(axis=2) > 215) | (s > 12))
+        keep_connected(arr, ink_mask=ink, include_neutral=True)
+        whiten_dark_in_white_regions(arr)
+        strip_logo_outer_fringe(arr)
+        shrink_alpha(arr, px=1)
+        return
 
     # Chroma-key green screen export
     if green_bg_mask(rgb)[0, 0] or green_bg_mask(rgb)[h - 1, w - 1]:

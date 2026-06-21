@@ -1079,19 +1079,20 @@ select:focus {
 .sidebar__brand {
   display: flex;
   justify-content: center;
-  padding: 0.25rem 0.5rem 0.75rem;
+  padding: 0.75rem 0.75rem 0.25rem;
 }
 
 .sidebar__logo {
-  height: 6rem;
+  height: 7.2rem;
   width: auto;
   max-width: 100%;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
 }
 
 @media (min-width: 900px) {
   .sidebar__logo {
-    height: 8rem;
+    height: 9.6rem;
   }
 }
 
@@ -1101,6 +1102,7 @@ select:focus {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.35rem;
+  margin-top: 1rem;
   margin-bottom: 0.75rem;
 }
 
@@ -1144,12 +1146,13 @@ select:focus {
 
 @media (min-width: 900px) {
   .sidebar__brand {
-    padding-bottom: 0.35rem;
+    padding: 1rem 1rem 0.35rem;
   }
 
   .sidebar__nav {
     flex-direction: column;
     gap: 0.12rem;
+    margin-top: 2rem;
     margin-bottom: 0.5rem;
   }
 
